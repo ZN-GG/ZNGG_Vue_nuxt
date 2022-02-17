@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    background: #f1f1f1f1;
+}
+svg{
+    display:inline;
+}
