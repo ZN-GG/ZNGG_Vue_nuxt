@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+html {
     background: #f1f1f1f1;
 }
-svg{
-    display:inline;
+
+svg {
+    display: inline;
+}
+
+.custom-font-14 {
+    font-size: 14px;
+}
+
+.custom-font-16 {
+    font-size: 16px;
 }
