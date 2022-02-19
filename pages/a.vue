@@ -8,7 +8,7 @@
           <div class="flex items-center">
             <p class="font-semibold text-2xl">今日推荐</p>
             <p class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400">
-              今夕何夕，见此良人
+              今夕何夕吗，见此良人
             </p>
           </div>
           <div>
@@ -26,10 +26,8 @@
             </p>
           </div>
           <div class="flex">
-            <div class="hidden md:flex">
-              <div class="btn-1">原创工具</div>
-              <div class="btn-1">程序员</div>
-            </div>
+            <div class="btn-1 active">原创工具</div>
+            <div class="btn-1">程序员</div>
             <div class="btn-1">更多</div>
           </div>
         </div>
@@ -171,8 +169,11 @@ export default Vue.extend({
     };
   },
   created() {
+    // console.log('this.$refs.barparent.$el.offsetWidth', this.$refs.container.$el.offsetWidth) //宽度
+
     var i = 0;
     for (i; i < 10; i++) {
+      console.log("create ==>" + i);
       this.articleList.push(this.articleList[0]);
     }
   },

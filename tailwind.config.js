@@ -1,4 +1,7 @@
+const { Left } = require("@icon-park/vue")
+
 module.exports = {
+  mode: 'jit',
   purge: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
@@ -7,6 +10,15 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
+    },
     extend: {},
   },
   plugins: [],
