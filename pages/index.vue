@@ -1,6 +1,5 @@
 <template>
   <div ref="html">
-    <Toolbar />
     <!-- 今日推荐 -->
     <div class="mx-auto container mt-8">
       <div ref="container" class="bg-white p-6 rounded-md my-4">
@@ -150,12 +149,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import "../assets/css/tailwind.css";
 import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
 
 export default Vue.extend({
   components: { ThumbsUp, PreviewOpen, Comments },
-  name: "IndexPage",
+  name: "index",
   data() {
     return {
       isRightFixedContainer: false,
@@ -177,30 +175,28 @@ export default Vue.extend({
     }
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll); // 监听滚动事件，然后用handleScroll这个方法进行相应的处理
+    window.addEventListener("scroll", this.handleScroll, false); // 监听滚动事件，然后用handleScroll这个方法进行相应的处理
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     setFloatContainer() {
-      this.$nextTick(() => {
-        let html = this.$refs.html as HTMLElement;
-        let container = this.$refs.container as HTMLElement;
-        let leftNormalContainer = this.$refs.leftNormalContainer as HTMLElement;
+      let leftNormalContainer = this.$refs.leftNormalContainer as HTMLElement;
+      if (
+        leftNormalContainer.getBoundingClientRect().top <= 0 &&
+        !this.isRightFixedContainer
+      ) {
         let rightFixedContainer = this.$refs.rightFixedContainer as HTMLElement;
-        let right = (html.offsetWidth - container.offsetWidth) / 2;
-        if (
-          leftNormalContainer.getBoundingClientRect().top <= 0 &&
-          !this.isRightFixedContainer
-        ) {
-          this.isRightFixedContainer = true;
-          this.rightFixedContainerRight = right;
-          this.rightFixedContainerWidth =
-            rightFixedContainer.offsetWidth + "px";
-        } else if (leftNormalContainer.getBoundingClientRect().top > 0) {
-          this.rightFixedContainerRight = 0;
-          this.rightFixedContainerWidth = "33.333333%";
-          this.isRightFixedContainer = false;
-        }
-      });
+        let right = leftNormalContainer.getBoundingClientRect().left;
+        this.isRightFixedContainer = true;
+        this.rightFixedContainerRight = right;
+        this.rightFixedContainerWidth = rightFixedContainer.offsetWidth + "px";
+      } else if (leftNormalContainer.getBoundingClientRect().top > 0) {
+        this.rightFixedContainerRight = 0;
+        this.rightFixedContainerWidth = "33.333333%";
+        this.isRightFixedContainer = false;
+      }
     },
     handleScroll() {
       let scrollTop =
@@ -209,7 +205,9 @@ export default Vue.extend({
         document.body.scrollTop; // 滚动条偏移量
       // let offsetTop = document.querySelector("#boxFixed").offsetTop; // 要滚动到顶部吸附的元素的偏移量
       // this.isFixed = scrollTop > offsetTop ? true : false; // 如果滚动到顶部了，this.isFixed就为true
-      this.setFloatContainer();
+      if (scrollTop > 20) {
+        this.setFloatContainer();
+      }
     },
   },
 });
