@@ -11,7 +11,7 @@
             </p>
           </div>
           <div>
-            <div class="btn-1">更多</div>
+            <div class="btn-1" @click="fetchSomething()">更多</div>
           </div>
         </div>
       </div>
@@ -55,27 +55,11 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <p
-                      class="
-                        font-semibold
-                        text-lg
-                        h-8
-                        leading-8
-                        w-full
-                        overflow-hidden
-                      "
-                    >
+                    <p class="font-semibold text-lg h-8 leading-8 w-full overflow-hidden">
                       {{ item.title }}
                     </p>
                     <p
-                      class="
-                        custom-font-14
-                        leading-8
-                        overflow-hidden
-                        h-6
-                        text-gray-400
-                        mb-2
-                      "
+                      class="custom-font-14 leading-8 overflow-hidden h-6 text-gray-400 mb-2"
                     >
                       {{ item.meta }}
                     </p>
@@ -100,12 +84,7 @@
                       </li>
                     </ul>
                   </div>
-                  <img
-                    class="flex-none w-32 h-24"
-                    src="img.webp"
-                    alt=""
-                    srcset=""
-                  />
+                  <img class="flex-none w-32 h-24" src="img.webp" alt="" srcset="" />
                 </div>
               </div>
             </li>
@@ -130,9 +109,7 @@
             <div class="flex justify-between items-center">
               <div class="flex items-center">
                 <p class="font-semibold text-2xl">AD</p>
-                <p
-                  class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400"
-                >
+                <p class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400">
                   广而告之
                 </p>
               </div>
@@ -149,7 +126,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
+import { ThumbsUp, PreviewOpen, Comments, Api } from "@icon-park/vue/lib";
 
 export default Vue.extend({
   components: { ThumbsUp, PreviewOpen, Comments },
@@ -162,7 +139,8 @@ export default Vue.extend({
       articleList: [
         {
           title: "零代码真香：但还离不开程序员",
-          meta: "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
+          meta:
+            "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
           img: "",
         },
       ],
@@ -208,6 +186,23 @@ export default Vue.extend({
       if (scrollTop > 20) {
         this.setFloatContainer();
       }
+    },
+    async fetchSomething() {
+      // const result = await this.$postRepository.create({
+      //   title: 'foo',
+      //   body: 'bar',
+      //   userId: 1
+      // })
+      // console.log(result);
+      // this.$apioo.get("http://icanhazip.com")
+      // const ip = this.$api.$get("http://icanhazip.com");
+      // const ip2 = this.$axios.$get("http://icanhazip.com");
+      // console.log(ip2);
+      // console.log(ip);
+
+      // const ip = await this.$api.$get("http://icanhazip.com");
+      const ip = await this.$api.$get("http://127.0.0.1:8888/user/info");
+      console.log(ip);
     },
   },
 });
