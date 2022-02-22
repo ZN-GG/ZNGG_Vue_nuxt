@@ -31,6 +31,7 @@
               leading-8
               bg-gray-100
             "
+            @click = "login()"
           >
             登陆
           </div>
@@ -98,6 +99,11 @@ export default {
 
   created() {
     // console.log(this.$router.params.type);
+  },
+  methods: {
+    login(){
+      this.$store.commit('todos/add', "1")
+    }
   },
 };
 </script>

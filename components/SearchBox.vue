@@ -11,19 +11,14 @@
     </a>
     <div v-show="selectShow" class="absolute bg-white px-3 py-1 border mt-1">
       <ul>
-        <li v-for="item in selectList" :key="item" class="li-1" @click="select(item)">{{item}}</li>
+        <li v-for="item in selectList" :key="item" class="li-1" @click="select(item)">
+          {{ item }}
+        </li>
       </ul>
     </div>
     <span class="m-2 custom-line-right"></span>
     <input
-      class="
-        w-40
-        bg-gray-100
-        border-0 border-transparent
-        focus:outline-none
-        custom-font-14
-        text-gray-600
-      "
+      class="w-40 bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600"
       v-model="searchKey"
       type="text"
     />
@@ -70,7 +65,7 @@ export default {
   data() {
     return {
       selectShow: false,
-      selectList: ["工具","文章","源码"],
+      selectList: ["工具", "文章", "源码"],
 
       searchKey: "",
       searchType: "工具",

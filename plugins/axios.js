@@ -3,7 +3,7 @@ export default ({ $axios }, inject) => {
   // And in the Vue instances (this.$repository in your components)
   const api = $axios.create({})
 
-  api.setToken("1eb6ee648a4a993cd0c3824e863f9ed5")
+  api.setToken("785ca47b48c50f802d99d08ba912e645")
 
   api.onRequest(config => {
     console.log('Making request to ' + config.url)
