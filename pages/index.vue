@@ -55,7 +55,9 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <p class="font-semibold text-lg h-8 leading-8 w-full overflow-hidden">
+                    <p
+                      class="font-semibold text-lg h-8 leading-8 w-full overflow-hidden"
+                    >
                       {{ item.title }}
                     </p>
                     <p
@@ -84,7 +86,12 @@
                       </li>
                     </ul>
                   </div>
-                  <img class="flex-none w-32 h-24" src="img.webp" alt="" srcset="" />
+                  <img
+                    class="flex-none w-32 h-24"
+                    src="img.webp"
+                    alt=""
+                    srcset=""
+                  />
                 </div>
               </div>
             </li>
@@ -109,7 +116,9 @@
             <div class="flex justify-between items-center">
               <div class="flex items-center">
                 <p class="font-semibold text-2xl">AD</p>
-                <p class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400">
+                <p
+                  class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400"
+                >
                   广而告之
                 </p>
               </div>
@@ -123,10 +132,10 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { ThumbsUp, PreviewOpen, Comments, Api } from "@icon-park/vue/lib";
+import { $axios } from "../api/request";
 
 export default Vue.extend({
   components: { ThumbsUp, PreviewOpen, Comments },
@@ -139,8 +148,7 @@ export default Vue.extend({
       articleList: [
         {
           title: "零代码真香：但还离不开程序员",
-          meta:
-            "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
+          meta: "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
           img: "",
         },
       ],
@@ -160,12 +168,12 @@ export default Vue.extend({
   },
   methods: {
     setFloatContainer() {
-      let leftNormalContainer = this.$refs.leftNormalContainer as HTMLElement;
+      let leftNormalContainer = this.$refs.leftNormalContainer;
       if (
         leftNormalContainer.getBoundingClientRect().top <= 0 &&
         !this.isRightFixedContainer
       ) {
-        let rightFixedContainer = this.$refs.rightFixedContainer as HTMLElement;
+        let rightFixedContainer = this.$refs.rightFixedContainer;
         let right = leftNormalContainer.getBoundingClientRect().left;
         this.isRightFixedContainer = true;
         this.rightFixedContainerRight = right;
@@ -199,10 +207,11 @@ export default Vue.extend({
       // const ip2 = this.$axios.$get("http://icanhazip.com");
       // console.log(ip2);
       // console.log(ip);
-
       // const ip = await this.$api.$get("http://icanhazip.com");
-      const ip = await this.$api.$get("http://127.0.0.1:8888/user/info");
+      const ip = await $axios.get("http://127.0.0.1:8888/user/info");
       console.log(ip);
+      this.$store.commit("localStorage/setToken", Date.parse(new Date()));
+      console.log(this.$store.state.localStorage.token);
     },
   },
 });
