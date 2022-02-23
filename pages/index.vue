@@ -135,7 +135,7 @@
 <script>
 import Vue from "vue";
 import { ThumbsUp, PreviewOpen, Comments, Api } from "@icon-park/vue/lib";
-import { $axios } from "../api/request";
+import { http } from "../api/http";
 
 export default Vue.extend({
   components: { ThumbsUp, PreviewOpen, Comments },
@@ -208,10 +208,8 @@ export default Vue.extend({
       // console.log(ip2);
       // console.log(ip);
       // const ip = await this.$api.$get("http://icanhazip.com");
-      const ip = await $axios.get("http://127.0.0.1:8888/user/info");
+      const ip = await http.get("http://127.0.0.1:8888/user/info");
       console.log(ip);
-      this.$store.commit("localStorage/setToken", Date.parse(new Date()));
-      console.log(this.$store.state.localStorage.token);
     },
   },
 });

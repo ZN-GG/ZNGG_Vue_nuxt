@@ -22,19 +22,22 @@
         <search-box class="hidden md:block" />
         <div class="login-group flex mx-4 custom-font-14">
           <div
+            v-show="(this.$store.state.localStorage.token.length == 0)"
             class="cursor-pointer select-none h-8 mx-1 px-2 leading-8 bg-gray-100"
             @click="login()"
           >
             登陆
           </div>
           <div
+            v-show="(this.$store.state.localStorage.token.length == 0)"
             class="cursor-pointer select-none h-8 mx-1 px-2 leading-8 bg-gray-100 hidden md:block"
           >
             注册
           </div>
           <div
-            v-show="false"
+            v-show="this.$store.state.localStorage.token.length > 0"
             class="cursor-pointer select-none h-8 mx-1 px-2 leading-8 bg-gray-100"
+            @click="logout()"
           >
             我的
           </div>
@@ -78,6 +81,9 @@ export default {
     login() {
       this.$store.commit("user/login");
     },
+    logout(){
+      this.$store.commit('localStorage/setToken','')
+    }
   },
 };
 </script>

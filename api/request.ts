@@ -4,6 +4,7 @@ let $axios: NuxtAxiosInstance
 
 export function initializeAxios (axiosInstance: NuxtAxiosInstance) {
   $axios = axiosInstance
+  $axios.setBaseURL("http://127.0.0.1:8888/")
 }
 
 
