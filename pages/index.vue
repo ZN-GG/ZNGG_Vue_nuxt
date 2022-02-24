@@ -47,7 +47,7 @@
               </p>
             </div>
             <div>
-              <div class="btn-1">更多</div>
+              <div class="btn-1"><nuxt-link to="read">更多</nuxt-link></div>
             </div>
           </div>
           <ul>
@@ -134,7 +134,7 @@
 </template>
 <script>
 import Vue from "vue";
-import { ThumbsUp, PreviewOpen, Comments, Api } from "@icon-park/vue/lib";
+import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
 import { http } from "../api/http";
 
 export default Vue.extend({

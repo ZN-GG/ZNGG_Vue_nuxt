@@ -1,12 +1,12 @@
 export const state = () => ({
-    isLogin: false
+    loginShow: false
 })
 
 export const mutations = {
     login(state) {
-        state.isLogin = true
+        state.loginShow = true
     },
     closeLogin(state) {
-        state.isLogin = false
+        state.loginShow = false
     }
 } 

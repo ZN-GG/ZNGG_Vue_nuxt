@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="this.$store.state.user.isLogin"
+    v-show="this.$store.state.user.loginShow"
     class="modal-show flex items-center w-full h-full fixed top-0 left-0 z-50 bg-gray-500 opacity-100 justify-center"
   >
     <div class="modal-content bg-white w-80 pt-12 p-4 relative rounded-md">
@@ -58,8 +58,9 @@
 import { Close } from "@icon-park/vue/lib";
 import { api } from "../api/api";
 import { nanoid } from "nanoid";
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
   components: {
     Close,
   },
@@ -67,8 +68,7 @@ export default {
   created() {},
   data() {
     return {
-      isShow: false,
-      captchaUrl: "http://127.0.0.1:8888/user/captcha?captcha_uuid=",
+      captchaUrl: "",
       captchaUrlPic: "",
       loginParams: {
         email: "",
@@ -81,10 +81,22 @@ export default {
   beforeMount() {
     let uuid = nanoid(10);
     this.captchaKey = uuid;
-    this.refreshCaptcha();
   },
-  props: {},
-  computed: {},
+  computed: {
+    isShow(){
+      return this.$store.state.user.loginShow
+    }
+  },
+  watch: {
+    isShow(n,o){
+      if (n) {
+        this.captchaUrl = "http://127.0.0.1:8888/user/captcha?captcha_uuid="
+        this.refreshCaptcha()
+      }else{
+        this.captchaUrl = ""
+      }
+    }
+  },
   methods: {
     close() {
       this.$store.commit("user/closeLogin");
@@ -101,18 +113,18 @@ export default {
       );
       this.refreshCaptcha();
       this.captcha = "";
-      if(result.success){
+      if (result.success) {
         console.log("登陆成功");
-        this.$store.commit("localStorage/setToken",result.data.password)
+        this.$store.commit("localStorage/setToken", result.data.password);
         this.close();
-      }else{
-        this.$store.commit("localStorage/setToken","")
+      } else {
+        this.$store.commit("localStorage/setToken", "");
         console.log("登陆失败");
       }
       console.log(result);
     },
   },
-};
+});
 </script>
 
 <style scoped>
