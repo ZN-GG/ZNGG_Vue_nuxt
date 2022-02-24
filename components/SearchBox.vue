@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-8 w-72 bg-gray-100 relative">
+  <div class="flex h-8 w-44 lg:w-72 bg-gray-100 relative">
     <a
       class="px-4 text-sm inline-flex select-none cursor-pointer"
       v-clickoutside="handleClose"
@@ -9,7 +9,7 @@
         >{{ searchType }}<down theme="filled"
       /></span>
     </a>
-    <div v-show="selectShow" class="absolute bg-white px-3 py-1 border mt-1">
+    <div v-show="selectShow" class="absolute bg-white px-3 py-1 border mt-8 z-40">
       <ul>
         <li v-for="item in selectList" :key="item" class="li-1" @click="select(item)">
           {{ item }}
@@ -18,11 +18,11 @@
     </div>
     <span class="m-2 custom-line-right"></span>
     <input
-      class="w-40 bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600"
+      class="w-20 lg:w-40 bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600"
       v-model="searchKey"
       type="text"
     />
-    <search class="ml-2 cursor-pointer" @click="search()" />
+    <search class="right-2 ml-2 cursor-pointer" @click="search()" />
   </div>
 </template>
 

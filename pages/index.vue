@@ -36,7 +36,7 @@
       <!-- 最新文章 -->
       <div class="flex flex-wrap relative">
         <div
-          class="bg-white p-6 rounded-md my-4 w-full lg:w-8/12 lg:mr-4"
+          class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12 lg:mr-4"
           ref="leftNormalContainer"
         >
           <div class="flex justify-between items-center">

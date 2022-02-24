@@ -1,9 +1,9 @@
 <template>
   <div ref="html">
-    <div class="mx-auto container mt-8">
+    <div class="mx-auto container">
       <div class="flex flex-wrap relative">
         <div
-          class="bg-white p-6 rounded-md my-4 w-full lg:w-8/12 lg:mr-4"
+          class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12 lg:mr-4"
           ref="leftNormalContainer"
         >
           <div class="flex justify-between items-center">
@@ -14,8 +14,17 @@
               </p>
             </div>
             <div>
-              <div class="btn-1"><nuxt-link to="read">更多</nuxt-link></div>
+              <div class="relative bg-gray-100 pl-3 pr-6 cursor-pointer rounded-md">
+                <span class="custom-font-14 leading-8 relative inline"
+                  >分类<down class="i-down" theme="filled"
+                /></span>
+              </div>
             </div>
+          </div>
+
+          <div class="flex py-3 space-x-4  flex-none overflow-auto">
+            <div class="btn-2">前端</div><div class="btn-2">后端</div><div class="btn-2">UI设计</div>
+            <div class="btn-2">自媒体运营</div><div class="btn-2">视频剪辑</div><div class="btn-2">安卓</div>
           </div>
           <ul>
             <li v-for="(item, index) in articleList" :key="index" class="mt-4">
@@ -101,13 +110,14 @@
 </template>
 
 <script>
-import { ThumbsUp, PreviewOpen, Comments, Api } from "@icon-park/vue/lib";
+import { ThumbsUp, PreviewOpen, Comments, Down } from "@icon-park/vue/lib";
 
 export default {
   components: {
     ThumbsUp,
     PreviewOpen,
     Comments,
+    Down,
   },
   name: "read",
   data() {
@@ -176,4 +186,15 @@ export default {
 .RightFixedContainer-fixed {
   @apply fixed top-2;
 }
+.border-t-1 {
+  border-top-width: 1px;
+}
+
+.i-down{
+  padding: 0 4px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 1.5px));
+}
+
 </style>
