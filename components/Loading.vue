@@ -32,6 +32,6 @@
     padding-top: 200px;
     font-size: 30px;
     font-family: sans-serif;
-    z-index: 9999999;
+    z-index: 999999;
   }
 </style>
