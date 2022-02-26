@@ -71,3 +71,4 @@ More information about the usage of this directory in [the documentation](https:
 ### `base`
 
 [vue-toastification](https://github.com/Maronato/vue-toastification/tree/main)
+
