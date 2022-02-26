@@ -124,9 +124,9 @@
       </div>
       <button
         class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 my-2"
-        @click="login()"
+        @click="register()"
       >
-        登陆
+        注册
       </button>
 
       <div class="mt-2 flex justify-between">
@@ -242,6 +242,7 @@ export default Vue.extend({
       console.log(result);
     },
     register(){
+      this.$toast.success("I'm a toast!");
     }
   },
 });

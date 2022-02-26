@@ -43,10 +43,15 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    'nuxt-vuex-localstorage'
+    'nuxt-vuex-localstorage',
+    "vue-toastification/nuxt"
   ],
   axios: {
     proxy: true
+  },
+  toast: {
+    draggable: false,
+    timeout: 2000
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

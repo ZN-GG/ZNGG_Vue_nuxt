@@ -70,4 +70,4 @@ More information about the usage of this directory in [the documentation](https:
 
 ### `base`
 
-[vue-toastify](https://github.com/nandi95/vue-toastify)
+[vue-toastification](https://github.com/Maronato/vue-toastification/tree/main)
