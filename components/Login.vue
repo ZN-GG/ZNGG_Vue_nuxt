@@ -42,7 +42,7 @@
       </div>
       <button
         class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 my-2"
-        @click="register()"
+        @click="login()"
       >
         登陆
       </button>
@@ -79,12 +79,13 @@
       />
       <div class="flex">
         <input
-          v-model="captcha"
+          v-model="captchaEmail"
           type="text"
           placeholder="邮箱验证码"
           class="bg-gray-100 w-3 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 mr-2 flex-1"
         />
         <button
+          @click="sendCaptcha()"
           class="flex-1 bg-blue-500 text-white p-2 my-2 custom-font-14 hover:bg-blue-600"
         >
           发送
@@ -97,13 +98,13 @@
         class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
       />
       <input
-        v-model="loginParams.password"
+        v-model="registerParams.password"
         type="password"
         placeholder="密码"
         class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
       />
       <input
-        v-model="loginParams.password"
+        v-model="repassword"
         type="password"
         placeholder="再输一遍密码"
         class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
@@ -151,10 +152,11 @@ import { Close } from "@icon-park/vue/lib";
 import { api } from "../api/api";
 import { nanoid } from "nanoid";
 import Vue from "vue";
+import { TextUtils } from "../utils/TextUtils";
 
 export default Vue.extend({
   components: {
-    Close
+    Close,
   },
   name: "Login",
   created() {},
@@ -175,6 +177,7 @@ export default Vue.extend({
       captcha: "",
       captchaEmail: "",
       captchaKey: "",
+      repassword: "",
     };
   },
   beforeMount() {
@@ -221,9 +224,10 @@ export default Vue.extend({
       this.registerParams.name = "";
       this.registerParams.password = "";
       this.captcha = "";
-      this.captchaEmail = ""
+      this.captchaEmail = "";
     },
     async login() {
+      if (!this.checkLogin()) return;
       let result = await api.user.login(
         this.loginParams,
         this.captcha,
@@ -232,18 +236,94 @@ export default Vue.extend({
       this.refreshCaptcha();
       this.captcha = "";
       if (result.success) {
-        console.log("登陆成功");
+        this.$toast.success(result.message);
         this.$store.commit("localStorage/setToken", result.data.password);
         this.close();
       } else {
         this.$store.commit("localStorage/setToken", "");
-        console.log("登陆失败");
+        this.$toast.error(result.message);
       }
       console.log(result);
     },
-    register(){
-      this.$toast.success("I'm a toast!");
-    }
+    async sendCaptcha() {
+      if (!TextUtils.checkEmail(this.registerParams.email)) {
+        this.$toast.info("邮箱格式不正确");
+        return false;
+      }
+      let result = await api.user.sendEmailCaptcha(this.registerParams.email);
+      if (result.success) {
+        this.$toast.success(result.message);
+      } else {
+        this.$toast.error(result.message);
+      }
+    },
+    async register() {
+      if (!this.checkRegister()) return;
+
+      let result = await api.user.register(
+        this.registerParams,
+        this.captchaEmail,
+        this.captcha,
+        this.captchaKey
+      );
+      this.refreshCaptcha();
+      if (result.success) {
+        this.$toast.success(result.message);
+        this.toLogin();
+      } else {
+        this.$toast.error(result.message);
+      }
+    },
+    checkLogin(): boolean {
+      if (!TextUtils.checkEmail(this.loginParams.email)) {
+        this.$toast.info("邮箱格式不正确");
+        return false;
+      }
+      if (TextUtils.isNullOrEmpty(this.loginParams.password)) {
+        this.$toast.info("密码不能为空");
+        return false;
+      }
+      if (TextUtils.isNullOrEmpty(this.captcha)) {
+        this.$toast.info("验证码不能为空");
+        return false;
+      }
+
+      return true;
+    },
+    checkRegister(): boolean {
+      if (!TextUtils.checkEmail(this.registerParams.email)) {
+        this.$toast.info("邮箱格式不正确");
+        return false;
+      }
+      if (TextUtils.isNullOrEmpty(this.captchaEmail)) {
+        this.$toast.info("邮箱验证码不能为空");
+        return false;
+      }
+      if (
+        TextUtils.isNullOrEmpty(this.registerParams.password) &&
+        TextUtils.isNullOrEmpty(this.repassword)
+      ) {
+        this.$toast.info("密码不能为空");
+        return false;
+      }
+      if (
+        TextUtils.isNullOrEmpty(this.registerParams.password) &&
+        TextUtils.isNullOrEmpty(this.repassword)
+      ) {
+        this.$toast.info("密码不能为空");
+        return false;
+      }
+      if (this.registerParams.password != this.repassword) {
+        this.$toast.info("两次输入的密码不一致");
+        return false;
+      }
+      if (TextUtils.isNullOrEmpty(this.captcha)) {
+        this.$toast.info("验证码不能为空");
+        return false;
+      }
+
+      return true;
+    },
   },
 });
 </script>

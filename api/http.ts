@@ -1,9 +1,16 @@
 import { $axios } from './request';
 
+type ApiResponse = {
+    success:boolean
+    code:number,
+    message: string,
+    data: any
+}
+
 export const http = {
     //get请求
     get(url: string, params = {}) {
-        return new Promise((resolve, reject) => {
+        return new Promise<ApiResponse>((resolve, reject) => {
             $axios.get(url, params).then(res => {
                 resolve(res.data)
             }).catch(error => {
@@ -14,7 +21,7 @@ export const http = {
 
     // post请求
     post(url: string, params = {}) {
-        return new Promise((resolve, reject) => {
+        return new Promise<ApiResponse>((resolve, reject) => {
             $axios.post(url, params).then(res => {
                 resolve(res.data)
             }).catch(error => {
