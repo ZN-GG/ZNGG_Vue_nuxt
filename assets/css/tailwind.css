@@ -2,23 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .btn-1 {
     @apply bg-gray-100 custom-font-12 leading-5 py-1 px-4 rounded-full whitespace-nowrap cursor-pointer hover:bg-blue-600 hover:text-white mx-1;
   }
+
   .btn-1 .active {
     @apply bg-blue-600 text-white;
   }
 
-  .btn-2{
-    @apply  bg-gray-100 custom-font-12 leading-5 py-1 px-4 rounded-md whitespace-nowrap cursor-pointer hover:bg-blue-600 hover:text-white mx-1;
+  .btn-2 {
+    @apply bg-gray-100 custom-font-12 leading-5 py-1 px-4 rounded-md whitespace-nowrap cursor-pointer hover:bg-blue-600 hover:text-white mx-1;
   }
 
-  .li-1{
-      @apply hover:bg-gray-100 px-2 py-1
+  .li-1 {
+    @apply hover:bg-gray-100 px-2 py-1;
   }
-
 }
 
 html {
@@ -28,7 +27,6 @@ html {
 svg {
   display: inline;
 }
-
 
 .custom-font-12 {
   font-size: 12px;
@@ -40,4 +38,18 @@ svg {
 
 .custom-font-16 {
   font-size: 16px;
+}
+
+.tool-item-cover {
+  padding-top: 58.82%;
+  background-color: #ccc;
+  background-repeat: no-repeat;
+}
+
+.tool-item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
 }

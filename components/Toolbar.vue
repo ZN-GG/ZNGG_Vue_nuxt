@@ -56,10 +56,10 @@ export default {
           link: "read",
           name: "文章",
         },
-        {
-          link: "sourcecode",
-          name: "源码",
-        },
+        // {
+        //   link: "sourcecode",
+        //   name: "源码",
+        // },
         {
           link: "friendlink",
           name: "友链",

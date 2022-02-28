@@ -14,17 +14,35 @@
               </p>
             </div>
             <div>
-              <div class="relative bg-gray-100 pl-3 pr-6 cursor-pointer rounded-md">
-                <span class="custom-font-14 leading-8 relative inline"
-                  >分类<down class="i-down" theme="filled"
-                /></span>
+              <div
+                @click="showCategory()"
+                class="relative bg-gray-100 pl-3 pr-6 cursor-pointer rounded-md"
+              >
+                <span
+                  class="custom-font-14 leading-8 relative inline select-none"
+                  >分类
+                  <span :class='isShowCategory ? "reverse" : ""'>
+                    <down
+                      class="i-down"
+                      theme="filled"
+                    />
+                  </span>
+                </span>
               </div>
             </div>
           </div>
 
-          <div class="flex py-3 space-x-4  flex-none overflow-auto">
-            <div class="btn-2">前端</div><div class="btn-2">后端</div><div class="btn-2">UI设计</div>
-            <div class="btn-2">自媒体运营</div><div class="btn-2">视频剪辑</div><div class="btn-2">安卓</div>
+          <div
+            v-show="isShowCategory"
+            :class="isShowCategory ? '' : 'hidden'"
+            class="flex py-3 space-x-4 flex-none overflow-auto"
+          >
+            <div class="btn-2">前端</div>
+            <div class="btn-2">后端</div>
+            <div class="btn-2">UI设计</div>
+            <div class="btn-2">自媒体运营</div>
+            <div class="btn-2">视频剪辑</div>
+            <div class="btn-2">安卓</div>
           </div>
           <ul>
             <li v-for="(item, index) in articleList" :key="index" class="mt-4">
@@ -32,12 +50,26 @@
                 <div class="flex">
                   <div class="flex-1 mr-6">
                     <p
-                      class="font-semibold text-lg h-8 leading-8 w-full overflow-hidden"
+                      class="
+                        font-semibold
+                        text-lg
+                        h-8
+                        leading-8
+                        w-full
+                        overflow-hidden
+                      "
                     >
                       {{ item.title }}
                     </p>
                     <p
-                      class="custom-font-14 leading-8 overflow-hidden h-6 text-gray-400 mb-2"
+                      class="
+                        custom-font-14
+                        leading-8
+                        overflow-hidden
+                        h-6
+                        text-gray-400
+                        mb-2
+                      "
                     >
                       {{ item.meta }}
                     </p>
@@ -122,6 +154,7 @@ export default {
   name: "read",
   data() {
     return {
+      isShowCategory: true,
       isRightFixedContainer: false,
       rightFixedContainerRight: 0,
       rightFixedContainerWidth: "33.333333%",
@@ -175,6 +208,9 @@ export default {
         this.setFloatContainer();
       }
     },
+    showCategory() {
+      this.isShowCategory = !this.isShowCategory;
+    },
   },
 };
 </script>
@@ -190,11 +226,16 @@ export default {
   border-top-width: 1px;
 }
 
-.i-down{
+.i-down {
   padding: 0 4px;
   position: absolute;
   top: 50%;
   transform: translateY(calc(-50% - 1.5px));
 }
-
+svg{
+    @apply duration-100
+}
+.reverse svg{
+    transform: rotate(180deg);
+}
 </style>

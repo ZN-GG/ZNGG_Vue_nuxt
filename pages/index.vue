@@ -32,6 +32,36 @@
             <div class="btn-1">更多</div>
           </div>
         </div>
+        <div class="flex pt-6">
+          <nuxt-link to="/tool/uncss"
+            class="w-full md:w-3/12 px-2 relative mb-8 hover:scale-105 duration-75"
+          >
+            <div class="rounded-md overflow-hidden border cursor-pointer">
+              <div
+                class="tool-item-cover bg-cover"
+                style="background-image: url('/img/tool-cover.webp')"
+              ></div>
+              <div class="pt-5 pb-3 px-4">
+                <div class="custom-font-14 h-10 font-bold tool-item-title">
+                  Json在线格式化
+                </div>
+                <div class="flex mt-2 justify-between">
+                  <div class="flex items-center leading-4">
+                    <PreviewOpen class="flex items-center" /><span
+                      class="custom-font-12 ml-1"
+                      >1882</span
+                    >
+                  </div>
+                  <div
+                    class="custom-font-12 font-normal bg-blue-500 text-white px-2 py-1 rounded-md"
+                  >
+                    立即使用
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
       </div>
       <!-- 最新文章 -->
       <div class="flex flex-wrap relative">
@@ -46,9 +76,9 @@
                 仰观宇宙之大，俯察品类之盛
               </p>
             </div>
-            <div>
-              <div class="btn-1"><nuxt-link to="read">更多</nuxt-link></div>
-            </div>
+            <nuxt-link to="read">
+              <div class="btn-1">更多</div>
+            </nuxt-link>
           </div>
           <ul>
             <li v-for="(item, index) in articleList" :key="index" class="mt-4">
