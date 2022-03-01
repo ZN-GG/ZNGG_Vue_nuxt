@@ -21,11 +21,8 @@
                 <span
                   class="custom-font-14 leading-8 relative inline select-none"
                   >分类
-                  <span :class='isShowCategory ? "reverse" : ""'>
-                    <down
-                      class="i-down"
-                      theme="filled"
-                    />
+                  <span :class="isShowCategory ? 'reverse' : ''">
+                    <down class="i-down" theme="filled" />
                   </span>
                 </span>
               </div>
@@ -49,7 +46,8 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <p
+                    <nuxt-link
+                      :to="'/read/post/' + item.id"
                       class="
                         font-semibold
                         text-lg
@@ -60,7 +58,7 @@
                       "
                     >
                       {{ item.title }}
-                    </p>
+                    </nuxt-link>
                     <p
                       class="
                         custom-font-14
@@ -160,6 +158,7 @@ export default {
       rightFixedContainerWidth: "33.333333%",
       articleList: [
         {
+          id: "3214421321312",
           title: "零代码真香：但还离不开程序员",
           meta: "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
           img: "",
@@ -232,10 +231,10 @@ export default {
   top: 50%;
   transform: translateY(calc(-50% - 1.5px));
 }
-svg{
-    @apply duration-100
+svg {
+  @apply duration-100;
 }
-.reverse svg{
-    transform: rotate(180deg);
+.reverse svg {
+  transform: rotate(180deg);
 }
 </style>
