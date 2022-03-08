@@ -53,7 +53,11 @@ export default {
     draggable: false,
     timeout: 2000
   },
-
+  // router: {
+  //   scrollBehavior (to, from, savedPosition) {
+  //     return { x: 0, y: 0 }
+  //   }
+  // },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: { allChunks: true },

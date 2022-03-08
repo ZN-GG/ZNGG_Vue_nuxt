@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="pb-5">
     <Toolbar />
-    <router-view />
+    <nuxt-child />
   </div>
 </template>
 
