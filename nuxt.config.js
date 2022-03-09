@@ -24,6 +24,7 @@ export default {
   plugins: [
     '~/plugins/axios',
     '~/plugins/login',
+    "~/plugins/prism",
 
   ],
 
@@ -44,7 +45,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'nuxt-vuex-localstorage',
-    "vue-toastification/nuxt"
+    "vue-toastification/nuxt",
   ],
   axios: {
     proxy: true
@@ -53,6 +54,13 @@ export default {
     draggable: false,
     timeout: 2000
   },
+  // content: {
+  //   markdown: {
+  //     prism: {
+  //       theme: 'prism-themes/themes/prism-material-oceanic.css'
+  //     }
+  //   }
+  // },
   // router: {
   //   scrollBehavior (to, from, savedPosition) {
   //     return { x: 0, y: 0 }

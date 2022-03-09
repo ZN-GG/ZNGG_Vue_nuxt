@@ -10,7 +10,11 @@ type ApiResponse = {
 export const article = {
 
     getDetail(id: string): Promise<ApiResponse> {
-        return http.get("/article/detail/" + id)
+        return http.get("/portal/article/" + id)
+    },
+
+    getList(page: number, size: number, params: any): Promise<ApiResponse> {
+        return http.get("/portal/article/" + page + "/" + size, params)
     }
 
 }

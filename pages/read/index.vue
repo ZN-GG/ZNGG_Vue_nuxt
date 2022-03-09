@@ -46,18 +46,19 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <nuxt-link
-                      :to="'/read/post/' + item.id"
-                      class="
-                        font-semibold
-                        text-lg
-                        h-8
-                        leading-8
-                        w-full
-                        overflow-hidden
-                      "
-                    >
-                      {{ item.title }}
+                    <nuxt-link target="_blank" :to="'read/post/' + item.id">
+                      <p
+                        class="
+                          font-semibold
+                          text-lg
+                          h-8
+                          leading-8
+                          w-full
+                          overflow-hidden
+                        "
+                      >
+                        {{ item.title }}
+                      </p>
                     </nuxt-link>
                     <p
                       class="
@@ -69,13 +70,13 @@
                         mb-2
                       "
                     >
-                      {{ item.meta }}
+                      {{ item.summary }}
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
                         <PreviewOpen class="flex items-center" /><span
                           class="custom-font-12 ml-1"
-                          >1887</span
+                          >{{ item.viewCount }}</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
@@ -98,6 +99,31 @@
                     alt=""
                     srcset=""
                   />
+                </div>
+              </div>
+            </li>
+            <li v-show="empty" class="mt-4 text-center">
+              <p>到底了</p>
+            </li>
+            <li v-show="loading" class="mt-4 text-center animate-pulse">
+              <div class="border-b pb-2">
+                <div class="flex">
+                  <div class="flex-1 mr-6">
+                    <div class="bg-gray-200 h-6"></div>
+                    <div
+                      class="
+                        mt-6
+                        custom-font-14
+                        leading-8
+                        overflow-hidden
+                        text-gray-400
+                        mb-2
+                        bg-gray-100
+                        h-12
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-none bg-gray-200 w-32 h-24" />
                 </div>
               </div>
             </li>
@@ -140,7 +166,14 @@
 </template>
 
 <script>
-import { ThumbsUp, PreviewOpen, Comments, Down } from "@icon-park/vue/lib";
+import {
+  ThumbsUp,
+  PreviewOpen,
+  Comments,
+  Down,
+  LoadingFour,
+} from "@icon-park/vue/lib";
+import { api } from "@/api/api";
 
 export default {
   components: {
@@ -148,30 +181,32 @@ export default {
     PreviewOpen,
     Comments,
     Down,
+    LoadingFour,
   },
   name: "read",
+  async asyncData() {
+    const articleResult = await api.article.getList(1, 10);
+    let articleList = {};
+    if (articleResult.success) {
+      articleList = articleResult.data.content;
+    }
+    return {
+      articleList,
+    };
+  },
   data() {
     return {
       isShowCategory: true,
       isRightFixedContainer: false,
       rightFixedContainerRight: 0,
       rightFixedContainerWidth: "33.333333%",
-      articleList: [
-        {
-          id: "949246603628118016",
-          title: "零代码真香：但还离不开程序员",
-          meta: "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
-          img: "",
-        },
-      ],
+      loading: false,
+      empty: false,
+      page: 2,
+      size: 10,
     };
   },
-  created() {
-    var i = 0;
-    for (i; i < 10; i++) {
-      this.articleList.push(this.articleList[0]);
-    }
-  },
+  created() {},
   mounted() {
     window.addEventListener("scroll", this.handleScroll, false); // 监听滚动事件，然后用handleScroll这个方法进行相应的处理
   },
@@ -206,9 +241,33 @@ export default {
       if (scrollTop > 20) {
         this.setFloatContainer();
       }
+
+      let documentHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      );
+      if (documentHeight - scrollTop - window.innerHeight < 60 && !this.empty) {
+        this.loadMore();
+      }
     },
     showCategory() {
       this.isShowCategory = !this.isShowCategory;
+    },
+    async loadMore() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      const result = await api.article.getList(this.page, 10);
+      if (result.success) {
+        console.log(result.data.content.length);
+        if (result.data.content.length == 0) {
+          this.empty = true;
+        }
+        this.articleList = this.articleList.concat(result.data.content);
+        this.page++;
+      }
+      this.loading = false;
     },
   },
 };

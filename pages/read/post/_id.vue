@@ -20,8 +20,8 @@
                   <div class="ml-2">
                     <p class="custom-font-16" v-text="article.user.name"></p>
                     <p class="custom-font-14 text-gray-500">
-                      {{ article.update_time }}&nbsp;&nbsp;&nbsp;&nbsp;阅读：{{
-                        article.view_count
+                      {{ article.updateTime }}&nbsp;&nbsp;&nbsp;&nbsp;阅读：{{
+                        article.viewCount
                       }}
                     </p>
                   </div>
@@ -76,6 +76,8 @@ export default {
       isSuccess,
       article,
     };
+  },
+  mounted() {
   },
 };
 </script>

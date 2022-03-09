@@ -33,8 +33,17 @@
           </div>
         </div>
         <div class="flex pt-6">
-          <nuxt-link to="/tool/uncss"
-            class="w-full md:w-3/12 px-2 relative mb-8 hover:scale-105 duration-75"
+          <nuxt-link
+            to="/tool/uncss"
+            class="
+              w-full
+              md:w-3/12
+              px-2
+              relative
+              mb-8
+              hover:scale-105
+              duration-75
+            "
           >
             <div class="rounded-md overflow-hidden border cursor-pointer">
               <div
@@ -53,7 +62,15 @@
                     >
                   </div>
                   <div
-                    class="custom-font-12 font-normal bg-blue-500 text-white px-2 py-1 rounded-md"
+                    class="
+                      custom-font-12
+                      font-normal
+                      bg-blue-500
+                      text-white
+                      px-2
+                      py-1
+                      rounded-md
+                    "
                   >
                     立即使用
                   </div>
@@ -85,21 +102,37 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
+                    <a target="_blank" :to="'read/post/' + item.id">
+                      <p
+                        class="
+                          font-semibold
+                          text-lg
+                          h-8
+                          leading-8
+                          w-full
+                          overflow-hidden
+                        "
+                      >
+                        {{ item.title }}
+                      </p>
+                    </a>
                     <p
-                      class="font-semibold text-lg h-8 leading-8 w-full overflow-hidden"
+                      class="
+                        custom-font-14
+                        leading-8
+                        overflow-hidden
+                        h-6
+                        text-gray-400
+                        mb-2
+                      "
                     >
-                      {{ item.title }}
-                    </p>
-                    <p
-                      class="custom-font-14 leading-8 overflow-hidden h-6 text-gray-400 mb-2"
-                    >
-                      {{ item.meta }}
+                      {{ item.summary }}
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
                         <PreviewOpen class="flex items-center" /><span
                           class="custom-font-12 ml-1"
-                          >1887</span
+                          >{{item.viewCount}}</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
@@ -165,31 +198,29 @@
 <script>
 import Vue from "vue";
 import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
-import { http } from "../api/http";
+import { api } from "../api/api";
 
 export default Vue.extend({
   components: { ThumbsUp, PreviewOpen, Comments },
   name: "index",
+  async asyncData() {
+    const articleResult = await api.article.getList(0, 10);
+    let articleList = {};
+    if (articleResult.success) {
+      articleList = articleResult.data.content;
+    }
+    return {
+      articleList,
+    };
+  },
   data() {
     return {
       isRightFixedContainer: false,
       rightFixedContainerRight: 0,
       rightFixedContainerWidth: "33.333333%",
-      articleList: [
-        {
-          title: "零代码真香：但还离不开程序员",
-          meta: "20年年底，一位同事去新公司做背调。电话打过来，是对方公司的CEO，互相介绍了一下公司业务，他们是做零代码开发的，说是企业的后台系统都可以胜任。",
-          img: "",
-        },
-      ],
     };
   },
-  created() {
-    var i = 0;
-    for (i; i < 10; i++) {
-      this.articleList.push(this.articleList[0]);
-    }
-  },
+  created() {},
   mounted() {
     window.addEventListener("scroll", this.handleScroll, false); // 监听滚动事件，然后用handleScroll这个方法进行相应的处理
   },
@@ -226,19 +257,10 @@ export default Vue.extend({
       }
     },
     async fetchSomething() {
-      // const result = await this.$postRepository.create({
-      //   title: 'foo',
-      //   body: 'bar',
-      //   userId: 1
-      // })
-      // console.log(result);
-      // this.$apioo.get("http://icanhazip.com")
-      // const ip = this.$api.$get("http://icanhazip.com");
-      // const ip2 = this.$axios.$get("http://icanhazip.com");
-      // console.log(ip2);
-      // console.log(ip);
-      // const ip = await this.$api.$get("http://icanhazip.com");
-      const ip = await http.get("http://127.0.0.1:8888/user/info");
+      //   const ip = await http.get("http://127.0.0.1:8888/user/info");
+      //   console.log(ip);
+
+      const ip = await api.article.getList(0, 10);
       console.log(ip);
     },
   },
