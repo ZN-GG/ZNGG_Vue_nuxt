@@ -34,12 +34,13 @@
             :class="isShowCategory ? '' : 'hidden'"
             class="flex py-3 space-x-4 flex-none overflow-auto"
           >
-            <div class="btn-2">前端</div>
-            <div class="btn-2">后端</div>
-            <div class="btn-2">UI设计</div>
-            <div class="btn-2">自媒体运营</div>
-            <div class="btn-2">视频剪辑</div>
-            <div class="btn-2">安卓</div>
+            <div
+              v-for="(item, index) in categoryList"
+              :key="index"
+              class="btn-2"
+            >
+              {{item.name}}
+            </div>
           </div>
           <ul>
             <li v-for="(item, index) in articleList" :key="index" class="mt-4">
@@ -190,8 +191,14 @@ export default {
     if (articleResult.success) {
       articleList = articleResult.data.content;
     }
+    const categoryResult = await api.article.getCategories();
+    let categoryList = {};
+    if (categoryResult.success) {
+      categoryList = categoryResult.data;
+    }
     return {
       articleList,
+      categoryList,
     };
   },
   data() {

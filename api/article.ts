@@ -15,6 +15,10 @@ export const article = {
 
     getList(page: number, size: number, params: any): Promise<ApiResponse> {
         return http.get("/portal/article/" + page + "/" + size, params)
+    },
+
+    getCategories():Promise<ApiResponse>{
+        return http.get("/portal/article_category")
     }
 
 }
