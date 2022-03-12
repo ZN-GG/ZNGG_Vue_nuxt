@@ -40,7 +40,7 @@
           </div>
           <div class="h-80 relative" v-else>
             <div class="absolute empty items-center text-2xl">
-              <Endless />
+              <span class="iconfont icon-cry" style="font-size: 24px" />
               <p class="text-gray-700">没有找到该文章！</p>
               <p>
                 <a href="/" class="text-blue-600 custom-font-14 my-4"
@@ -56,29 +56,27 @@
 </template>
 
 <script>
+import LoadingVue from "~/components/Loading.vue";
 import { api } from "../../../api/api";
-import { Endless } from "@icon-park/vue/lib";
 
 export default {
   scrollToTop: true,
-  components: {
-    Endless,
-  },
-  async asyncData({ app, params }) {
+  components: {},
+  async asyncData({ params }) {
     let isSuccess = false;
     const result = await api.article.getDetail(params.id);
     if (!result.success) {
-      return;
+      isSuccess = false;
+    } else {
+      isSuccess = true;
     }
-    isSuccess = true;
     const article = result.data;
     return {
       isSuccess,
       article,
     };
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 

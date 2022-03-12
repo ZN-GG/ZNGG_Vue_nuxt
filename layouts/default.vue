@@ -19,17 +19,15 @@
         hover:bg-blue-500 hover:text-white
       "
     >
-      <div class="w-6 h-6 font-black stroke-2"><ToTop /></div>
+      <div class="w-6 h-6 font-black stroke-2"><span class="iconfont icon-backtop" /></div>
     </div>
   </div>
 </template>
 
 <script>
-import { ToTop } from "@icon-park/vue/lib";
 
 export default {
   components: {
-    ToTop,
   },
   data() {
     return {

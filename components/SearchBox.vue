@@ -1,34 +1,31 @@
 <template>
-  <div class="flex h-8 w-44 lg:w-72 bg-gray-100 relative">
-    <a
-      class="px-4 text-sm inline-flex select-none cursor-pointer"
+  <div class="flex max-w-xs bg-gray-100 relative">
+    <div
+      class="pl-2 md:pl-4 text-sm inline-flex select-none cursor-pointer"
       v-clickoutside="handleClose"
       @click="selectBtn()"
     >
       <span class="custom-font-14 leading-8 relative inline"
-        >{{ searchType }}<down theme="filled"
-      /></span>
-    </a>
-    <div v-show="selectShow" class="absolute bg-white px-3 py-1 border mt-8 z-40">
+        >{{ searchType }}<span class="iconfont icon-arrow-down ml-1" /></span>
+    </div>
+    <div v-show="selectShow" class="absolute bg-white pl-1 pr-2 md:px-3 py-1 border mt-8 z-40">
       <ul>
         <li v-for="item in selectList" :key="item" class="li-1" @click="select(item)">
           {{ item }}
         </li>
       </ul>
     </div>
-    <span class="m-2 custom-line-right"></span>
+    <span class="m-2 ml-1 md:ml-2 custom-line-right"></span>
     <input
-      class="w-20 lg:w-40 bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600"
+      class="w-16 md:w-20 lg:w-40 bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600"
       v-model="searchKey"
       type="text"
     />
-    <search class="right-2 ml-2 cursor-pointer" @click="search()" />
+    <span class="mr-2 cursor-pointer iconfont icon-search" @click="search()" />
   </div>
 </template>
 
 <script>
-import { Down, Search } from "@icon-park/vue/lib";
-
 const clickoutside = {
   // 初始化指令
   bind(el, binding, vnode) {
@@ -57,8 +54,6 @@ const clickoutside = {
 
 export default {
   components: {
-    Down,
-    Search,
   },
 
   name: "SearchBox",
@@ -94,10 +89,7 @@ export default {
 .custom-line-right {
   border-right: 1px solid #dee1e4;
 }
-.i-icon {
-  padding: 0 4px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(calc(-50% - 1.5px));
+.icon-search{
+    font-size: 20px;
 }
 </style>

@@ -16,14 +16,15 @@
             <div>
               <div
                 @click="showCategory()"
-                class="relative bg-gray-100 pl-3 pr-6 cursor-pointer rounded-md"
+                class="relative bg-gray-100 px-3 cursor-pointer rounded-md"
               >
                 <span
                   class="custom-font-14 leading-8 relative inline select-none"
                   >分类
-                  <span :class="isShowCategory ? 'reverse' : ''">
-                    <down class="i-down" theme="filled" />
-                  </span>
+                  <span
+                    class="iconfont icon-arrow-down inline-block"
+                    :class="isShowCategory ? 'reverse' : ''"
+                  />
                 </span>
               </div>
             </div>
@@ -39,7 +40,7 @@
               :key="index"
               class="btn-2"
             >
-              {{item.name}}
+              {{ item.name }}
             </div>
           </div>
           <ul>
@@ -47,7 +48,7 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <nuxt-link target="_blank" :to="'read/post/' + item.id">
+                    <nuxt-link target="_blank" :to="'/read/post/' + item.id">
                       <p
                         class="
                           font-semibold
@@ -75,19 +76,19 @@
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
-                        <PreviewOpen class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-browse" /><span
                           class="custom-font-12 ml-1"
                           >{{ item.viewCount }}</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
-                        <ThumbsUp class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-good" /><span
                           class="custom-font-12 ml-1"
                           >1887</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
-                        <Comments class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-comments" /><span
                           class="custom-font-12 ml-1"
                           >1887</span
                         >
@@ -96,7 +97,7 @@
                   </div>
                   <img
                     class="flex-none w-32 h-24"
-                    src="img.webp"
+                    src="/img.webp"
                     alt=""
                     srcset=""
                   />
@@ -167,23 +168,9 @@
 </template>
 
 <script>
-import {
-  ThumbsUp,
-  PreviewOpen,
-  Comments,
-  Down,
-  LoadingFour,
-} from "@icon-park/vue/lib";
 import { api } from "@/api/api";
 
 export default {
-  components: {
-    ThumbsUp,
-    PreviewOpen,
-    Comments,
-    Down,
-    LoadingFour,
-  },
   name: "read",
   async asyncData() {
     const articleResult = await api.article.getList(1, 10);
@@ -291,16 +278,10 @@ export default {
   border-top-width: 1px;
 }
 
-.i-down {
-  padding: 0 4px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(calc(-50% - 1.5px));
-}
-svg {
+.icon-arrow-down {
   @apply duration-100;
 }
-.reverse svg {
+.reverse {
   transform: rotate(180deg);
 }
 </style>

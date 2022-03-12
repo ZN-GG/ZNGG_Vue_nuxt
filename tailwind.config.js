@@ -1,5 +1,3 @@
-const { Left } = require("@icon-park/vue")
-
 module.exports = {
   mode: 'jit',
   purge: [

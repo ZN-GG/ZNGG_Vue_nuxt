@@ -21,10 +21,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
 
 export default Vue.extend({
-  components: { ThumbsUp, PreviewOpen, Comments },
   name: "friendlink",
   data() {
     return {};

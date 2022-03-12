@@ -7,7 +7,7 @@
       v-show="!isRegister"
       class="modal-content bg-white w-80 pt-12 p-4 relative rounded-md"
     >
-      <Close class="right-0 top-0 absolute m-2 w-5 h-5" @click="close()" />
+      <span class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close" @click="close()" />
       <img
         class="left-0 top-0 w-20 absolute m-2"
         src="/logo-black.png"
@@ -64,7 +64,7 @@
       v-show="isRegister"
       class="modal-content bg-white w-80 pt-12 p-4 relative rounded-md"
     >
-      <Close class="right-0 top-0 absolute m-2 w-5 h-5" @click="close()" />
+      <span class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close" @click="close()" />
       <img
         class="left-0 top-0 w-20 absolute m-2"
         src="/logo-black.png"
@@ -148,7 +148,6 @@
 </template>
 
 <script lang="ts">
-import { Close } from "@icon-park/vue/lib";
 import { api } from "../api/api";
 import { nanoid } from "nanoid";
 import Vue from "vue";
@@ -156,7 +155,6 @@ import { TextUtils } from "../utils/TextUtils";
 
 export default Vue.extend({
   components: {
-    Close,
   },
   name: "Login",
   created() {},
@@ -192,7 +190,7 @@ export default Vue.extend({
   watch: {
     isShow(n, o) {
       if (n) {
-        this.captchaUrl = "http://127.0.0.1:8888/user/captcha?captcha_uuid=";
+        this.captchaUrl = "http://127.0.0.1:8888/user/user/captcha?captcha_uuid=";
         this.toLogin();
       } else {
         this.captchaUrl = "";

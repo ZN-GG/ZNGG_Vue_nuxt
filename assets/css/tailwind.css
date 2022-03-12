@@ -40,6 +40,10 @@ svg {
   font-size: 16px;
 }
 
+.custom-font-20{
+  font-size: 20px;
+}
+
 .tool-item-cover {
   padding-top: 58.82%;
   background-color: #ccc;

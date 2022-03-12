@@ -3,7 +3,7 @@
     <div class="flex px-1 md:px-6 py-4 justify-between items-center">
       <div class="flex items-center">
         <div class="font-black inline text-xl cursor-pointer">
-          <img src="/logo-black.png" class="w-20 h-8" alt="" srcset="" />
+          <a href="/"><img src="/logo-black.png" class="w-20 h-8" alt="" srcset="" /></a>
         </div>
         <ul class="menu ml-4 items-center hidden md:inline custom-font-16 pl-4">
           <li class="inline mx-2 cursor-pointer select-none">
@@ -18,23 +18,56 @@
           </li>
         </ul>
       </div>
-      <div class="flex">
+      <div class="flex items-center">
         <search-box class="block rounded-md" />
-        <div class="login-group flex mx-2 lg:mx-4 custom-font-14">
-          <div
-            v-show="this.$store.state.localStorage.token.length == 0"
-            class="cursor-pointer select-none h-8 mx-1 px-3 md:px-5 leading-8 text-white bg-blue-500 rounded-md"
+        <div
+          class="
+            login-group
+            flex
+            mx-2
+            lg:mx-4
+            custom-font-14
+            items-center
+            leading-8
+          "
+        >
+          <p
             @click="login()"
+            v-show="
+              this.$store.state.localStorage.token == 'undefined' ||
+              this.$store.state.localStorage.token == ''
+            "
+            class="
+              cursor-pointer
+              select-none
+              mx-1
+              px-3
+              md:px-5
+              text-white
+              bg-blue-500
+              rounded-md
+            "
           >
             登陆
-          </div>
-          <div
-            v-show="this.$store.state.localStorage.token.length > 0"
-            class="cursor-pointer select-none h-8 mx-1 px-3 md:px-5 leading-8 bg-gray-100 rounded-md"
+          </p>
+          <p
             @click="logout()"
+            v-show="
+              this.$store.state.localStorage.token != 'undefined' &&
+              this.$store.state.localStorage.token != ''
+            "
+            class="
+              cursor-pointer
+              select-none
+              mx-1
+              px-3
+              md:px-5
+              bg-gray-100
+              rounded-md
+            "
           >
             我的
-          </div>
+          </p>
         </div>
       </div>
     </div>
@@ -90,6 +123,10 @@ header {
 .nuxt-link-active {
   color: #3955f6;
   font-weight: 900;
+}
+
+.icon-category {
+  font-size: 24px;
 }
 </style>
 >

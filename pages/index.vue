@@ -56,7 +56,7 @@
                 </div>
                 <div class="flex mt-2 justify-between">
                   <div class="flex items-center leading-4">
-                    <PreviewOpen class="flex items-center" /><span
+                    <span class="flex items-center iconfont icon-browse" /><span
                       class="custom-font-12 ml-1"
                       >1882</span
                     >
@@ -102,7 +102,7 @@
               <div class="border-b pb-2">
                 <div class="flex">
                   <div class="flex-1 mr-6">
-                    <a target="_blank" :to="'read/post/' + item.id">
+                    <nuxt-link target="_blank" :to="'/read/post/' + item.id">
                       <p
                         class="
                           font-semibold
@@ -115,7 +115,7 @@
                       >
                         {{ item.title }}
                       </p>
-                    </a>
+                    </nuxt-link>
                     <p
                       class="
                         custom-font-14
@@ -130,19 +130,19 @@
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
-                        <PreviewOpen class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-browse" /><span
                           class="custom-font-12 ml-1"
                           >{{item.viewCount}}</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
-                        <ThumbsUp class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-good" /><span
                           class="custom-font-12 ml-1"
                           >1887</span
                         >
                       </li>
                       <li class="flex items-center leading-4 ml-4">
-                        <Comments class="flex items-center" /><span
+                        <span class="flex items-center iconfont icon-comments" /><span
                           class="custom-font-12 ml-1"
                           >1887</span
                         >
@@ -197,11 +197,9 @@
 </template>
 <script>
 import Vue from "vue";
-import { ThumbsUp, PreviewOpen, Comments } from "@icon-park/vue/lib";
 import { api } from "../api/api";
 
 export default Vue.extend({
-  components: { ThumbsUp, PreviewOpen, Comments },
   name: "index",
   async asyncData() {
     const articleResult = await api.article.getList(0, 10);
