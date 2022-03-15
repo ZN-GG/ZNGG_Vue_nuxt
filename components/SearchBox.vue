@@ -21,7 +21,7 @@
       v-model="searchKey"
       type="text"
     />
-    <span class="mr-2 cursor-pointer iconfont icon-search" @click="search()" />
+    <span class="mr-2 leading-8 cursor-pointer iconfont icon-search" @click="search()" />
   </div>
 </template>
 

@@ -100,17 +100,17 @@
           <ul>
             <li v-for="(item, index) in articleList" :key="index" class="mt-4">
               <div class="border-b pb-2">
-                <div class="flex">
+                <div class="flex relative">
                   <div class="flex-1 mr-6">
                     <nuxt-link target="_blank" :to="'/read/post/' + item.id">
                       <p
                         class="
                           font-semibold
-                          text-lg
+                          text-base
                           h-8
                           leading-8
                           w-full
-                          overflow-hidden
+                          overflow-y-hidden
                         "
                       >
                         {{ item.title }}
@@ -130,27 +130,28 @@
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
-                        <span class="flex items-center iconfont icon-browse" /><span
-                          class="custom-font-12 ml-1"
-                          >{{item.viewCount}}</span
-                        >
+                        <span
+                          class="flex items-center iconfont icon-browse"
+                        /><span class="custom-font-12 ml-1">{{
+                          item.viewCount
+                        }}</span>
                       </li>
-                      <li class="flex items-center leading-4 ml-4">
-                        <span class="flex items-center iconfont icon-good" /><span
-                          class="custom-font-12 ml-1"
-                          >1887</span
-                        >
+                      <li class="flex items-center leading-4 ml-1">
+                        <span
+                          class="flex items-center iconfont icon-good"
+                        /><span class="custom-font-12 ml-1">1887</span>
                       </li>
-                      <li class="flex items-center leading-4 ml-4">
-                        <span class="flex items-center iconfont icon-comments" /><span
-                          class="custom-font-12 ml-1"
-                          >1887</span
-                        >
+                      <li class="flex items-center leading-4 ml-1">
+                        <span
+                          class="flex items-center iconfont icon-comments"
+                        /><span class="custom-font-12 ml-1">1887</span>
                       </li>
                     </ul>
                   </div>
+                  <div v-if="index % 4 != 0" class="flex-none w-32 h-24"></div>
                   <img
-                    class="flex-none w-32 h-24"
+                    v-if="index % 4 != 0"
+                    class="flex-auto w-32 h-24 absolute right-0"
                     src="img.webp"
                     alt=""
                     srcset=""

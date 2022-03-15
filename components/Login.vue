@@ -190,7 +190,8 @@ export default Vue.extend({
   watch: {
     isShow(n, o) {
       if (n) {
-        this.captchaUrl = "http://127.0.0.1:8888/user/user/captcha?captcha_uuid=";
+        this.captchaUrl = "http://api.zn.gg/user/user/captcha?captcha_uuid=";
+        // this.captchaUrl = "http://127.0.0.1:8888/user/user/captcha?captcha_uuid=";
         this.toLogin();
       } else {
         this.captchaUrl = "";
