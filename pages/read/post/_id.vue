@@ -62,6 +62,11 @@ import { api } from "../../../api/api";
 export default {
   scrollToTop: true,
   components: {},
+  head() {
+    return {
+      link: [{ ref: "stylesheet", href: require('~/assets/css/theme/vue.css')}],
+    };
+  },
   async asyncData({ params }) {
     let isSuccess = false;
     const result = await api.article.getDetail(params.id);
@@ -126,31 +131,7 @@ export default {
 }
 
 .container {
-  max-width: 100%;
-}
-
-@screen sm {
-  .container {
-    max-width: 100%;
-  }
-}
-
-@screen md {
-  .container {
-    max-width: 100%;
-  }
-}
-
-@screen lg {
-  .container {
-    max-width: 1400px;
-  }
-}
-
-@screen xl {
-  .container {
-    max-width: 1400px;
-  }
+  max-width: 1536px;
 }
 
 .empty {
