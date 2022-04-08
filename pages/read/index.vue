@@ -3,7 +3,7 @@
     <div class="mx-auto container">
       <div class="flex flex-wrap relative">
         <div
-          class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12 lg:mr-4"
+          class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12"
           ref="leftNormalContainer"
         >
           <div class="flex justify-between items-center">
@@ -76,22 +76,21 @@
                     </p>
                     <ul class="flex items-center mt-6">
                       <li class="flex items-center leading-4">
-                        <span class="flex items-center iconfont icon-browse" /><span
-                          class="custom-font-12 ml-1"
-                          >{{ item.viewCount }}</span
-                        >
+                        <span
+                          class="flex items-center iconfont icon-browse"
+                        /><span class="custom-font-12 ml-1">{{
+                          item.viewCount
+                        }}</span>
                       </li>
                       <li class="flex items-center leading-4 ml-1">
-                        <span class="flex items-center iconfont icon-good" /><span
-                          class="custom-font-12 ml-1"
-                          >1887</span
-                        >
+                        <span
+                          class="flex items-center iconfont icon-good"
+                        /><span class="custom-font-12 ml-1">1887</span>
                       </li>
                       <li class="flex items-center leading-4 ml-1">
-                        <span class="flex items-center iconfont icon-comments" /><span
-                          class="custom-font-12 ml-1"
-                          >1887</span
-                        >
+                        <span
+                          class="flex items-center iconfont icon-comments"
+                        /><span class="custom-font-12 ml-1">1887</span>
                       </li>
                     </ul>
                   </div>
@@ -135,31 +134,37 @@
         </div>
 
         <!-- 广而告之 -->
-        <div
-          v-bind:style="{
-            right: rightFixedContainerRight + 'px',
-            width: rightFixedContainerWidth,
-          }"
-          :class="[
-            isRightFixedContainer
-              ? 'RightFixedContainer-fixed'
-              : 'RightFixedContainer-absolute',
-          ]"
-          class="ml-4 h-20 pl-6 my-4 hidden lg:block w-full lg:w-4/12"
-          ref="rightFixedContainer"
-        >
-          <div class="bg-white rounded-md p-6">
-            <div class="flex justify-between items-center">
-              <div class="flex items-center">
-                <p class="font-semibold text-2xl">AD</p>
-                <p
-                  class="hidden lg:inline leading-8 mx-4 text-sm text-gray-400"
-                >
-                  广而告之
-                </p>
-              </div>
-              <div>
-                <div class="btn-1">更多</div>
+        <div class="mt-4 hidden lg:block w-full lg:w-4/12 absolute right-0">
+          <div class="pl-6 w-full" ref="rightNormalContainer">
+            <div class="w-full h-40 bg-red-400"></div>
+            <div class="w-full h-40 bg-red-400"></div>
+          </div>
+          <div
+            v-bind:style="{
+              width: rightFixedContainerWidth,
+            }"
+            class="h-20 pl-6 my-4 hidden lg:block w-full"
+            ref="rightFixedContainer"
+          >
+            <div class="bg-white rounded-md p-6">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <p class="font-semibold text-2xl">AD</p>
+                  <p
+                    class="
+                      hidden
+                      lg:inline
+                      leading-8
+                      mx-4
+                      text-sm text-gray-400
+                    "
+                  >
+                    广而告之
+                  </p>
+                </div>
+                <div>
+                  <div class="btn-1">更多</div>
+                </div>
               </div>
             </div>
           </div>
@@ -193,9 +198,7 @@ export default {
   data() {
     return {
       isShowCategory: true,
-      isRightFixedContainer: false,
-      rightFixedContainerRight: 0,
-      rightFixedContainerWidth: "33.333333%",
+      rightFixedContainerWidth: "100%",
       loading: false,
       empty: false,
       page: 2,
@@ -211,20 +214,16 @@ export default {
   },
   methods: {
     setFloatContainer() {
-      let leftNormalContainer = this.$refs.leftNormalContainer;
-      if (
-        leftNormalContainer.getBoundingClientRect().top <= 0 &&
-        !this.isRightFixedContainer
-      ) {
-        let rightFixedContainer = this.$refs.rightFixedContainer;
-        let right = leftNormalContainer.getBoundingClientRect().left;
-        this.isRightFixedContainer = true;
-        this.rightFixedContainerRight = right;
-        this.rightFixedContainerWidth = rightFixedContainer.offsetWidth + "px";
-      } else if (leftNormalContainer.getBoundingClientRect().top > 0) {
-        this.rightFixedContainerRight = 0;
-        this.rightFixedContainerWidth = "33.333333%";
-        this.isRightFixedContainer = false;
+      let rightNormalContainer = this.$refs.rightNormalContainer;
+      let rightFixedContainer = this.$refs.rightFixedContainer;
+      if (rightNormalContainer.getBoundingClientRect().bottom <= 0) {
+        rightFixedContainer.style.position = "fixed";
+        rightFixedContainer.style.top = "0.5rem";
+        this.rightFixedContainerWidth = rightNormalContainer.offsetWidth + "px";
+      } else if (rightNormalContainer.getBoundingClientRect().bottom > 0) {
+        this.rightFixedContainerWidth = "100%";
+        rightFixedContainer.style.top = "";
+        rightFixedContainer.style.position = "absolute";
       }
     },
     handleScroll() {
