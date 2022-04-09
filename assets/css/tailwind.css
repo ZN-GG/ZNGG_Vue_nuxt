@@ -28,6 +28,10 @@ svg {
   display: inline;
 }
 
+.min-h-20{
+  min-height: 5rem;
+}
+
 .custom-font-12 {
   font-size: 12px;
 }

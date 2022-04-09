@@ -29,7 +29,8 @@
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node",
-      "vue-toastification/nuxt"
+      "vue-toastification/nuxt",
+      "cookie-universal-nuxt",
     ]
   },
   "exclude": [

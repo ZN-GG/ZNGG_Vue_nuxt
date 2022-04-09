@@ -3,7 +3,7 @@ import { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
 import { $axios, initializeAxios } from '~/api/request'
 
 
-const axios: Plugin = ({ error, app: { $axios, store} }) => {
+const axios: Plugin = ({ error, app: { $axios, store } }) => {
   initializeAxios($axios)
 
   $axios.onRequest((config: AxiosRequestConfig) => {
@@ -30,6 +30,7 @@ const axios: Plugin = ({ error, app: { $axios, store} }) => {
       error({ statusCode: status, message: data })
       return Promise.reject(e)
     })
+
 }
 
 export default axios

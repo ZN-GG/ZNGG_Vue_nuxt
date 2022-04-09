@@ -1,8 +1,6 @@
-export default function ({store, redirect}) {
-    let token;
-    token = store.state.localStorage.token.length > 0 ? true : false
-
+export default function ({ store, app, redirect, route }) {
+    let token = app.$cookies.get('token')
     if (!token) {
-        store.commit("user/login")
+        redirect("/login")
     }
 }

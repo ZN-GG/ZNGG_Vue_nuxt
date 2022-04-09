@@ -2,9 +2,7 @@
   <div ref="html">
     <div class="mx-auto container">
       <div class="flex flex-wrap relative">
-        <div
-          class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12"
-        >
+        <div class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12">
           <div v-if="isSuccess" class="">
             <div class="">
               <p class="font-semibold w-full text-xl lg:text-3xl">
@@ -49,6 +47,36 @@
             </div>
           </div>
         </div>
+        <div class="bg-white p-6 rounded-md mt-4 w-full lg:w-8/12">
+          <div v-if="isSuccess" class="">
+            <div class="">
+              <p class="font-bold text-xl my-2">评论</p>
+              <div class="flex w-fll justify-between items-center mt-4">
+                <div class="flex w-full">
+                  <img
+                    :src="article.user.avatar"
+                    class="w-10 h-10 rounded-full"
+                  />
+                  <div class="w-full px-4">
+                    <div
+                      contenteditable="true"
+                      class="
+                        w-full
+                        min-h-20
+                        bg-gray-50
+                        border-0 border-transparent
+                        focus:outline-none
+                        custom-font-14
+                        text-gray-600
+                        p-2
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="mt-4 hidden lg:block w-full lg:w-4/12 absolute right-0">
           <div class="pl-6 w-full" ref="rightNormalContainer">
             <div class="w-full h-40 bg-red-400"></div>
@@ -80,7 +108,10 @@
               </div>
               <hr class="mx-6" />
               <div>
-                <ul class="article-contents overflow-y-auto py-2 px-6">
+                <ul
+                  class="article-contents overflow-y-auto py-2 px-6"
+                  ref="articleContents"
+                >
                   <li
                     v-for="(item, index) in docMenu"
                     :key="item.id"
@@ -90,7 +121,6 @@
                     <a
                       :href="'#' + item.id"
                       :class="{ 'text-blue-600 active': tocActive === index }"
-                      @click="handlerSroll($event, item.id, index)"
                       >{{ item.text }}</a
                     >
                   </li>
@@ -193,34 +223,56 @@ export default {
       // this.isFixed = scrollTop > offsetTop ? true : false; // 如果滚动到顶部了，this.isFixed就为true
       if (scrollTop > 20) {
         this.setFloatContainer();
-
-        // 获取所有锚点元素
-        const titleNavList = document.querySelectorAll(
-          "article h1,article h2,article h3,article h4,article h5,article h6"
-        );
-
-        // 计算所有锚点元素的 offsetTop 的高度
-        const offsetTopList = [];
-        titleNavList.forEach((item) => {
-          offsetTopList.push(item.offsetTop);
-        });
-
-        // 获取当前文档流的 scrollTop
-        const scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop;
-        // 定义当前所在的目录下标
-        let navIndex = 0;
-        // 比较当前文章滚动的距离scrollTop与各锚点标题的offsetTop ,当scrollTop超过当前元素的scrollTop,则定位到当前标题
-        for (let n = 0; n < offsetTopList.length; n++) {
-          if (scrollTop >= offsetTopList[n]) {
-            navIndex = n;
-          }
-        }
-        //当前高亮的目录索引,默认为0
-        this.tocActive = navIndex;
+        this.setContentsActive();
       }
     },
-    handlerSroll(e, id) {},
+    setContentsActive() {
+      // 获取所有锚点元素
+      const titleNavList = document.querySelectorAll(
+        "article h1,article h2,article h3,article h4,article h5,article h6"
+      );
+
+      // 计算所有锚点元素的 offsetTop 的高度
+      const offsetTopList = [];
+      titleNavList.forEach((item) => {
+        offsetTopList.push(item.offsetTop);
+      });
+
+      // 获取当前文档流的 scrollTop
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      // 定义当前所在的目录下标
+      let navIndex = 0;
+      // 比较当前文章滚动的距离scrollTop与各锚点标题的offsetTop ,当scrollTop超过当前元素的scrollTop,则定位到当前标题
+      for (let n = 0; n < offsetTopList.length; n++) {
+        if (scrollTop >= offsetTopList[n]) {
+          navIndex = n;
+        }
+      }
+      //当前高亮的目录索引,默认为0
+      this.tocActive = navIndex;
+
+      let cateList = Array.prototype.slice.call(
+        this.$refs.articleContents.querySelectorAll("li")
+      );
+      for (let i = 0; i < cateList.length; i++) {
+        if (navIndex === i) {
+          const top = this.getElementTop(
+            cateList[i],
+            this.$refs.articleContents
+          );
+          this.$refs.articleContents.scrollTop =
+            top - this.$refs.articleContents.offsetHeight / 2;
+        }
+      }
+    },
+    getElementTop(el, by = null) {
+      let top = el.offsetTop;
+      if (by) {
+        top = top - by.offsetTop;
+      }
+      return top;
+    },
   },
 };
 </script>

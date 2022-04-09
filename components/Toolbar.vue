@@ -3,7 +3,9 @@
     <div class="flex px-1 md:px-6 py-4 justify-between items-center">
       <div class="flex items-center">
         <div class="font-black inline text-xl cursor-pointer">
-          <a href="/"><img src="/logo-black.png" class="w-20 h-8" alt="" srcset="" /></a>
+          <a href="/"
+            ><img src="/logo-black.png" class="w-20 h-8" alt="" srcset=""
+          /></a>
         </div>
         <ul class="menu ml-4 items-center hidden md:inline custom-font-16 pl-4">
           <li class="inline mx-2 cursor-pointer select-none">
@@ -33,10 +35,7 @@
         >
           <p
             @click="login()"
-            v-show="
-              this.$store.state.localStorage.token == 'undefined' ||
-              this.$store.state.localStorage.token == ''
-            "
+            v-show="!this.$store.state.user.isLogin"
             class="
               cursor-pointer
               select-none
@@ -52,10 +51,7 @@
           </p>
           <p
             @click="logout()"
-            v-show="
-              this.$store.state.localStorage.token != 'undefined' &&
-              this.$store.state.localStorage.token != ''
-            "
+            v-show="this.$store.state.user.isLogin"
             class="
               cursor-pointer
               select-none
@@ -109,7 +105,10 @@ export default {
       this.$store.commit("user/login");
     },
     logout() {
+      this.$store.commit("user/setLogin", false);
       this.$store.commit("localStorage/setToken", "");
+      this.$cookies.remove("token");
+      this.$router.push("/")
     },
   },
 };

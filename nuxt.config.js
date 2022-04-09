@@ -50,6 +50,7 @@ export default {
     '@nuxtjs/axios',
     'nuxt-vuex-localstorage',
     "vue-toastification/nuxt",
+    'cookie-universal-nuxt',
   ],
   axios: {
     proxy: true

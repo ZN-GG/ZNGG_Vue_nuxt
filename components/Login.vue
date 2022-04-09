@@ -1,13 +1,29 @@
 <template>
   <div
     v-show="this.$store.state.user.loginShow"
-    class="modal-show flex items-center w-full h-full fixed top-0 left-0 z-40 bg-gray-500 opacity-100 justify-center"
+    class="
+      modal-show
+      flex
+      items-center
+      w-full
+      h-full
+      fixed
+      top-0
+      left-0
+      z-40
+      bg-gray-500
+      opacity-100
+      justify-center
+    "
   >
     <div
       v-show="!isRegister"
       class="modal-content bg-white w-80 pt-12 p-4 relative rounded-md"
     >
-      <span class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close" @click="close()" />
+      <span
+        class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close"
+        @click="close()"
+      />
       <img
         class="left-0 top-0 w-20 absolute m-2"
         src="/logo-black.png"
@@ -18,20 +34,49 @@
         v-model="loginParams.email"
         type="text"
         placeholder="邮箱地址"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <input
         v-model="loginParams.password"
         type="password"
         placeholder="密码"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <div class="flex items-center justify-around">
         <input
           v-model="captcha"
           type="text"
           placeholder="验证码"
-          class="bg-gray-100 w-3 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 mr-2 flex-1"
+          class="
+            bg-gray-100
+            w-3
+            border-0 border-transparent
+            focus:outline-none
+            custom-font-14
+            text-gray-600
+            p-2
+            my-2
+            mr-2
+            flex-1
+          "
         />
         <img
           class="h-9 flex-1"
@@ -64,7 +109,10 @@
       v-show="isRegister"
       class="modal-content bg-white w-80 pt-12 p-4 relative rounded-md"
     >
-      <span class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close" @click="close()" />
+      <span
+        class="right-0 top-0 absolute m-2 w-5 h-5 iconfont icon-close"
+        @click="close()"
+      />
       <img
         class="left-0 top-0 w-20 absolute m-2"
         src="/logo-black.png"
@@ -75,18 +123,46 @@
         v-model="registerParams.email"
         type="text"
         placeholder="邮箱地址"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <div class="flex">
         <input
           v-model="captchaEmail"
           type="text"
           placeholder="邮箱验证码"
-          class="bg-gray-100 w-3 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 mr-2 flex-1"
+          class="
+            bg-gray-100
+            w-3
+            border-0 border-transparent
+            focus:outline-none
+            custom-font-14
+            text-gray-600
+            p-2
+            my-2
+            mr-2
+            flex-1
+          "
         />
         <button
           @click="sendCaptcha()"
-          class="flex-1 bg-blue-500 text-white p-2 my-2 custom-font-14 hover:bg-blue-600"
+          class="
+            flex-1
+            bg-blue-500
+            text-white
+            p-2
+            my-2
+            custom-font-14
+            hover:bg-blue-600
+          "
         >
           发送
         </button>
@@ -95,26 +171,64 @@
         v-model="registerParams.name"
         type="text"
         placeholder="用户名"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <input
         v-model="registerParams.password"
         type="password"
         placeholder="密码"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <input
         v-model="repassword"
         type="password"
         placeholder="再输一遍密码"
-        class="bg-gray-100 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 w-full"
+        class="
+          bg-gray-100
+          border-0 border-transparent
+          focus:outline-none
+          custom-font-14
+          text-gray-600
+          p-2
+          my-2
+          w-full
+        "
       />
       <div class="flex items-center justify-around">
         <input
           v-model="captcha"
           type="text"
           placeholder="验证码"
-          class="bg-gray-100 w-3 border-0 border-transparent focus:outline-none custom-font-14 text-gray-600 p-2 my-2 mr-2 flex-1"
+          class="
+            bg-gray-100
+            w-3
+            border-0 border-transparent
+            focus:outline-none
+            custom-font-14
+            text-gray-600
+            p-2
+            my-2
+            mr-2
+            flex-1
+          "
         />
         <img
           class="h-9 flex-1"
@@ -154,8 +268,7 @@ import Vue from "vue";
 import { TextUtils } from "../utils/TextUtils";
 
 export default Vue.extend({
-  components: {
-  },
+  components: {},
   name: "Login",
   created() {},
   data() {
@@ -200,6 +313,12 @@ export default Vue.extend({
   },
   methods: {
     close() {
+      if (this.$store.state.user.isLogin && this.$route.path == "/login") {
+        this.$router.push("/user");
+      }
+      if (!this.$store.state.user.isLogin && this.$route.path == "/login") {
+        this.$router.push("/");
+      }
       this.$store.commit("user/closeLogin");
     },
     refreshCaptcha() {
@@ -237,9 +356,16 @@ export default Vue.extend({
       if (result.success) {
         this.$toast.success(result.message);
         this.$store.commit("localStorage/setToken", result.data.password);
+        this.$store.commit("user/setLogin", true);
+        this.$cookies.set("token", true, {
+          path: "/",
+          maxAge: 60 * 60 * 24 * 14,
+        });
         this.close();
       } else {
+        this.$store.commit("user/setLogin", false);
         this.$store.commit("localStorage/setToken", "");
+        this.$cookies.remove("token");
         this.$toast.error(result.message);
       }
       console.log(result);
