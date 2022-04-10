@@ -49,8 +49,8 @@
           >
             登陆
           </p>
-          <p
-            @click="logout()"
+          <nuxt-link
+            to="/user"
             v-show="this.$store.state.user.isLogin"
             class="
               cursor-pointer
@@ -63,7 +63,7 @@
             "
           >
             我的
-          </p>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -104,11 +104,8 @@ export default {
     login() {
       this.$store.commit("user/login");
     },
-    logout() {
-      this.$store.commit("user/setLogin", false);
-      this.$store.commit("localStorage/setToken", "");
-      this.$cookies.remove("token");
-      this.$router.push("/")
+    userCenter() {
+      this.$router.push("/user")
     },
   },
 };
