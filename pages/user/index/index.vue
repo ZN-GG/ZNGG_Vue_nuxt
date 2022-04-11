@@ -5,6 +5,10 @@
 <script>
 export default {
 
+    mounted(){
+        this.$toast.success("main")
+    }
+
 }
 </script>
 

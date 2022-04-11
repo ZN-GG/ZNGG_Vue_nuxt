@@ -29,6 +29,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/login',
     "~/plugins/prism",
+    '~/plugins/edit',
 
   ],
 
@@ -58,6 +59,11 @@ export default {
   toast: {
     draggable: false,
     timeout: 2000
+  },
+  vue: {
+    config: {
+      performance: false,
+    }
   },
   // content: {
   //   markdown: {
