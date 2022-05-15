@@ -28,9 +28,6 @@ export default {
   plugins: [
     '~/plugins/axios',
     '~/plugins/login',
-    "~/plugins/prism",
-    '~/plugins/edit',
-
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -60,11 +57,11 @@ export default {
     draggable: false,
     timeout: 2000
   },
-  vue: {
-    config: {
-      performance: false,
-    }
-  },
+  // vue: {
+  //   config: {
+  //     performance: false,
+  //   }
+  // },
   // content: {
   //   markdown: {
   //     prism: {
@@ -93,6 +90,19 @@ export default {
           grid: true
         }
       }
+    },
+    extend(config, { isDev, isClient }) {
+      // ..
+      config.module.rules.push({
+        include: /node_modules/,
+        test: /\.mjs$/,
+        type: 'javascript/auto',
+      })
+      // Sets webpack's mode to development if `isDev` is true.
+      if (isDev) {
+        //config.mode = 'development'
+      }
     }
+    
   }
 }
